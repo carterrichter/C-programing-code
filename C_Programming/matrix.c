@@ -74,5 +74,5 @@ void freeMatrix(Matrix *mat) {
     //freeing the memory used for the row pointers
     free(mat -> data);
     //freeing the memory used for the pointer of the matrix
-    free(mat);
+    free(mat); 
 }
