@@ -3,8 +3,6 @@
 #include "matrix.c"
 
 int main() {
-    // Test createMatrix and initializeMatrixZeros
-
     double firstMatrix[3][3] = {
         {1,2,3},
         {4,5,6},
@@ -27,6 +25,12 @@ int main() {
     printf("\n");
     getDimensions(A);
     getDimensions(B);
+
+    printf("\n");
+    getMatrixElement(A, 0, 0);
+    getMatrixElement(A, 0, 1);
+    getMatrixElement(B, 0, 0);
+    getMatrixElement(B, 0, 1);
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");

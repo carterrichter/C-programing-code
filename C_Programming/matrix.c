@@ -20,21 +20,21 @@ Matrix* createMatrix(int rows, int columns) {
     }
     
     //assigns the rows and columns of the matrix
-    mat -> rows = rows;
-    mat -> columns = columns;
+    mat->rows = rows;
+    mat->columns = columns;
     
     // Allocates memory for array of pointers, each pointing to a different row
-    mat -> data = (double**)malloc(rows * sizeof(double*));
+    mat->data = (double**)malloc(rows * sizeof(double*));
     //checks again if malloc failed or not
-    if (mat -> data == NULL) {
+    if (mat->data == NULL) {
         fprintf(stderr, "Memory allocation failed.\n");
         exit(EXIT_FAILURE);
     }
     
     //allocates memory for each row based off values from columns. Check for failure within each allocation
     for (int i = 0; i < rows; i++) {
-        mat -> data[i] = (double*)malloc(columns * sizeof(double));
-        if (mat -> data[i] == NULL) {
+        mat->data[i] = (double*)malloc(columns * sizeof(double));
+        if (mat->data[i] == NULL) {
             fprintf(stderr, "Memory allocation failed.\n");
             exit(EXIT_FAILURE);
         }
@@ -47,9 +47,9 @@ Matrix* createMatrix(int rows, int columns) {
 //main use for this function is to bring back the matrices to 0's and make sure I'm starting from a neutral beginning 
 void initializeMatrixZeros(Matrix *mat) {
     //quick nested loop that replaces the data of each element of a matrix with 0's
-    for (int i = 0; i < mat -> rows; i++) {
-        for (int j = 0; j < mat -> columns; j++) {
-            mat -> data[i][j] = 0.0;
+    for (int i = 0; i < mat->rows; i++) {
+        for (int j = 0; j < mat->columns; j++) {
+            mat->data[i][j] = 0.0;
         }
     }
 }
@@ -57,9 +57,9 @@ void initializeMatrixZeros(Matrix *mat) {
 //function created to iterate through a matrix given its pointer, and print its elements up to 2 decimal places (for simplicity) with a new line between each row
 void printMatrix(Matrix *mat) {
     //nested loop that finds each element of the matrix and prints it out
-    for (int i = 0; i < mat -> rows; i++) {
-        for (int j = 0; j < mat -> columns; j++) {
-            printf("%.2f\t", mat -> data[i][j]);
+    for (int i = 0; i < mat->rows; i++) {
+        for (int j = 0; j < mat->columns; j++) {
+            printf("%.2f\t", mat->data[i][j]);
         }
         //creates a new line between rows
         printf("\n");
@@ -69,24 +69,46 @@ void printMatrix(Matrix *mat) {
 //function to call when all is said and done to free the allocated memory for the matrices given their pointer
 void freeMatrix(Matrix *mat) {
     //freeing each row of the matrix
-    for (int i = 0; i < mat -> rows; i++) {
-        free(mat -> data[i]);
+    for (int i = 0; i < mat->rows; i++) {
+        free(mat->data[i]);
     }
     //freeing the memory used for the row pointers
-    free(mat -> data);
+    free(mat->data);
     //freeing the memory used for the pointer of the matrix
     free(mat); 
 }
 
-void setMatrixData(Matrix *mat, double data[][mat -> columns]) {
-    for (int i = 0; i < mat -> rows; i++) {
-        for (int j = 0; j < mat -> columns; j++) {
-            mat -> data[i][j] = data[i][j];
+void setMatrixData(Matrix *mat, double data[][mat->columns]) {
+    for (int i = 0; i < mat->rows; i++) {
+        for (int j = 0; j < mat->columns; j++) {
+            mat->data[i][j] = data[i][j];
         }
     }
 }
 
 int getDimensions(Matrix *mat){
-    printf("Dimensions of specified Matrix: %d rows x %d columns\n", mat -> rows, mat -> columns);
-    return mat -> rows, mat -> columns;
+    //check for if mat is viable
+    if (mat == NULL){
+        fprintf(stderr, "Error: Matrix not found\n");
+        return -1;
+    }
+    else{
+        printf("Dimensions of specified Matrix: %d rows x %d columns\n", mat->rows, mat->columns);
+        return mat -> rows, mat -> columns;
+    }
+}
+
+double getMatrixElement(Matrix *mat, int row, int column){
+    //check for if mat is viable
+    if (mat == NULL){
+        fprintf(stderr, "Error: Matrix not found\n");
+        return -1;
+    }
+    if (row >= 0 && row < mat->rows && column >= 0 && column < mat->columns){
+        printf("Element at specified location of specified matrix: %.2f\n", mat->data[row][column]);
+        return mat->data[row][column];
+    } else{
+        fprintf(stderr, "Error: Chosen location out of bounds (row = %d, column = %d)", row, column);
+        return -1;
+    }
 }
