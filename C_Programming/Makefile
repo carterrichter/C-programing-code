@@ -1,4 +1,6 @@
+# setting compiler to be used for C as gcc
 CC = gcc
+# additional options for safeguards for the compiler
 CFLAGS = -Wall -Wextra -std=c99
 
 # list of source files
