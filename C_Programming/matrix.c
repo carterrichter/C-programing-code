@@ -44,11 +44,12 @@ Matrix* createMatrix(int rows, int columns) {
 }
 
 //function created to fill out a matrix with 0's given the pointer of a Matrix
+//main use for this function is to bring back the matrices to 0's and make sure I'm starting from a neutral beginning 
 void initializeMatrixZeros(Matrix *mat) {
     //quick nested loop that replaces the data of each element of a matrix with 0's
     for (int i = 0; i < mat -> rows; i++) {
         for (int j = 0; j < mat -> columns; j++) {
-            mat->data[i][j] = 0.0;
+            mat -> data[i][j] = 0.0;
         }
     }
 }
@@ -75,4 +76,17 @@ void freeMatrix(Matrix *mat) {
     free(mat -> data);
     //freeing the memory used for the pointer of the matrix
     free(mat); 
+}
+
+void setMatrixData(Matrix *mat, double data[][mat -> columns]) {
+    for (int i = 0; i < mat -> rows; i++) {
+        for (int j = 0; j < mat -> columns; j++) {
+            mat -> data[i][j] = data[i][j];
+        }
+    }
+}
+
+int getDimensions(Matrix *mat){
+    printf("Dimensions of specified Matrix: %d rows x %d columns\n", mat -> rows, mat -> columns);
+    return mat -> rows, mat -> columns;
 }

@@ -1,4 +1,5 @@
 #include "C_Programming.h"
+#include "matrix.c"
 
 int main() {
     // Example usage

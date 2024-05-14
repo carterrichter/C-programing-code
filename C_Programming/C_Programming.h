@@ -13,5 +13,7 @@ Matrix* createMatrix(int rows, int columns);
 void initializeMatrixZeros(Matrix *mat);
 void printMatrix(Matrix *mat);
 void freeMatrix(Matrix *mat);
+void setMatrixData(Matrix *mat, double data[][mat -> columns]);
+int getDimensions(Matrix *mat);
 
 #endif /* C_PROGRAMMING_H plea*/
