@@ -53,11 +53,15 @@ int main() {
 
     double testForChange[3] = {0, 0, 0};
     //setMatrixRow(A, 0, testForChange);
-    //setMatrixColumn(A, 0, testForChange);
+    setMatrixColumn(A, 0, testForChange);
 
     //resizeMatrix(&A, 5, 5);
     //printMatrix(A);
 
+    //Matrix *C = createSubset(A, 0, 2, 0, 2);
+   // printMatrix(C);
+    //setSubset(C, 0, 0, B);
+    //printMatrix(C);
     //Matrix *C = addMatrices(A, B);
     //printMatrix(C);
     //Matrix *C = subMatrices(A, B);

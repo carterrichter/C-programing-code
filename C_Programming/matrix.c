@@ -78,6 +78,7 @@ void freeMatrix(Matrix *mat) {
     free(mat); 
 }
 
+//function that will set the data of a matrix given an array
 void setMatrixData(Matrix *mat, double data[][mat->columns]) {
     for (int i = 0; i < mat->rows; i++) {
         for (int j = 0; j < mat->columns; j++) {
@@ -86,6 +87,7 @@ void setMatrixData(Matrix *mat, double data[][mat->columns]) {
     }
 }
 
+//function which will find the dimensions of a matrix given its pointer
 int getDimensions(Matrix *mat){
     //check for if mat is viable
     if (mat == NULL){
@@ -94,38 +96,41 @@ int getDimensions(Matrix *mat){
     }
     else{
         printf("Dimensions of specified Matrix: %d rows x %d columns\n", mat->rows, mat->columns);
-        return mat -> rows, mat -> columns;
+        return mat->rows, mat->columns;
     }
 }
 
+//function which will retrieve an element at a specific point in the matrix
 double getMatrixElement(Matrix *mat, int row, int column){
     //check for if mat is viable
     if (mat == NULL){
         fprintf(stderr, "Error: Matrix not found\n");
         return -1;
     }
+    //error checking to see if given row and column are within the matrix
     if (row >= 0 && row < mat->rows && column >= 0 && column < mat->columns){
         printf("Element at specified location of specified matrix: %.2f\n", mat->data[row][column]);
         return mat->data[row][column];
+    //if not in bounds, error is printed    
     } else{
         fprintf(stderr, "Error: Chosen location out of bounds (row = %d, column = %d)", row, column);
         return -1;
     }
 }
 
+//function which will set a specific element to a specified value
 void setMatrixElement(Matrix *mat, int row, int column, double value){
     if(mat == NULL){
         fprintf(stderr, "Error: Matrix not found\n");
     }
     if (row >= 0 && row < mat->rows && column >= 0 && column < mat->columns){
-        printf("*Changing specified element*\n");
-        printf("****************************\n");
         mat->data[row][column] = value;
     }else{
         fprintf(stderr, "Error: Position not found\n");
     }
 }
 
+//function which will retrieve and print a row of a matrix
 void getMatrixRow(Matrix *mat, int row) {
     if(mat == NULL || row < 0 || row >= mat->rows){
         fprintf(stderr, "Error: Argument error");
@@ -136,6 +141,7 @@ void getMatrixRow(Matrix *mat, int row) {
     printf("\n");
 }
 
+//function which will retrieve and print a column of a matrix
 void getMatrixColumn(Matrix *mat, int column){
     if(mat == NULL || column < 0 || column >= mat->columns){
         fprintf(stderr, "Error: Argument error");
@@ -146,6 +152,7 @@ void getMatrixColumn(Matrix *mat, int column){
     printf("\n");
 }
 
+//function which will change the values of a matrix's row given an array
 void setMatrixRow(Matrix *mat, int row, double values[]){
     if(mat == NULL || row < 0 || row >= mat->rows){
         fprintf(stderr,"Error: Argument error\n");
@@ -156,17 +163,20 @@ void setMatrixRow(Matrix *mat, int row, double values[]){
         printf("%.2f\t", mat->data[row][j]);
     }
 }
+
+//function which will change the values of a matrix's column given an array
 void setMatrixColumn(Matrix *mat, int column, double values[]){
     if(mat == NULL || column < 0 || column >= mat->columns){
         fprintf(stderr, "Error: Argument error");
     }
-    printf("New row down below\n");
+    printf("New column down below\n");
     for(int i = 0; i < mat->rows; i++){
         mat->data[i][column] = values[i];
         printf("%.2f\n", mat->data[i][column]);
     }
 }
 
+//function which creates a copy of a matrix from a specific starting and ending row and column
 Matrix* createSubset(Matrix *mat, int startRow, int endRow, int startColumn, int endColumn){
     if (mat == NULL){
         fprintf(stderr, "Error: Matrix not found");
@@ -189,7 +199,7 @@ Matrix* createSubset(Matrix *mat, int startRow, int endRow, int startColumn, int
     return subMatrix;
 }
 
-//nonfunctional and I do not know how to fix...
+//a function that will set a subset of a matrix with another matrix of matching dimensions
 void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src){
     if (!dest || !src){
         fprintf(stderr, "Error: Wrong pointer");
@@ -205,11 +215,12 @@ void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src){
     }
     for(int i = 0; i < src->rows; i++){
         for(int j = 0; j < src->columns; j++){
-            dest->data[startRow + i][startColumn + 1] = src->data[i][j];
+            dest->data[startRow + i][startColumn + j] = src->data[i][j];
         }
     }
 }
 
+//a function which will resize a matrix given a new row and column size
 void resizeMatrix(Matrix **mat, int newRows, int newColumns){
     if(!mat || !(*mat)){
         fprintf(stderr, "Error: Wrong pointer provided");
@@ -221,6 +232,7 @@ void resizeMatrix(Matrix **mat, int newRows, int newColumns){
         return;
     }
     
+    //determines if newRows/newColumns is smaller, and sets the number of columns/rows to the smaller value
     int minRows = (newRows < (*mat)->rows) ? newRows : (*mat)->rows;
     int minColumns = (newColumns < (*mat)->columns) ? newColumns : (*mat)->columns;
 
@@ -233,6 +245,7 @@ void resizeMatrix(Matrix **mat, int newRows, int newColumns){
     *mat = newMat;
 }
 
+//function which will add two matrices
 Matrix* addMatrices(const Matrix *mat1, const Matrix *mat2){
     if(!mat1 || !mat2){
         fprintf(stderr, "Error: Wrong Pointers");
@@ -255,6 +268,7 @@ Matrix* addMatrices(const Matrix *mat1, const Matrix *mat2){
     return result;
 }
 
+//function which will subtract two matrices
 Matrix* subMatrices(const Matrix *mat1, const Matrix *mat2){
     if(!mat1 || !mat2){
         fprintf(stderr, "Error: Wrong Pointers");
@@ -277,6 +291,7 @@ Matrix* subMatrices(const Matrix *mat1, const Matrix *mat2){
     return result;
 }
 
+//function which will multiply two matrices
 Matrix* multiplyMatrices(const Matrix *mat1, const Matrix *mat2){
     if (!mat1 || !mat2) {
         fprintf(stderr, "Error: One or more matrix pointers are NULL.\n");
@@ -306,6 +321,7 @@ Matrix* multiplyMatrices(const Matrix *mat1, const Matrix *mat2){
     return result;
 }
 
+//function which will create a deep copy of a matrix
 Matrix* deepCopyMatrix(const Matrix *src){
     if (!src) {
         fprintf(stderr, "Error: Source matrix is NULL.\n");
@@ -352,6 +368,7 @@ Matrix* deepCopyMatrix(const Matrix *src){
     return copy;
 }
 
+//function which will check if two matrices are equal
 int areMatricesEqual(const Matrix *mat1, const Matrix *mat2){
     if (!mat1 || !mat2) {
         fprintf(stderr, "Error: One or more matrix pointers are NULL.\n");
@@ -375,6 +392,7 @@ int areMatricesEqual(const Matrix *mat1, const Matrix *mat2){
     return 1;
 }
 
+//function which will rotate a matrix
 void rotateMatrix(Matrix *mat){
     if (!mat) {
         fprintf(stderr, "Error: invalid matrix.\n");
