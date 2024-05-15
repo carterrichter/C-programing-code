@@ -189,6 +189,7 @@ Matrix* createSubset(Matrix *mat, int startRow, int endRow, int startColumn, int
     return subMatrix;
 }
 
+//nonfunctional and I do not know how to fix...
 void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src){
     if (!dest || !src){
         fprintf(stderr, "Error: Wrong pointer");
@@ -230,4 +231,48 @@ void resizeMatrix(Matrix **mat, int newRows, int newColumns){
     }
     freeMatrix(*mat);
     *mat = newMat;
+}
+
+Matrix* addMatrices(const Matrix *mat1, const Matrix *mat2){
+    if(!mat1 || !mat2){
+        fprintf(stderr, "Error: Wrong Pointers");
+        return NULL;
+    }
+    if(mat1->rows != mat2->rows || mat1->columns != mat2->columns){
+        fprintf(stderr, "Error: not matching dimensions");
+        return NULL;
+    }
+    Matrix *result = createMatrix(mat1->rows, mat1->columns);
+    if(!result){
+        fprintf(stderr, "Error: Memory allocation failed");
+        return NULL;
+    }
+    for(int i = 0; i < mat1 ->rows; i++){
+        for(int j = 0; j < mat1->columns; j++){
+            result->data[i][j] = mat1->data[i][j] + mat2->data[i][j];
+        }
+    }
+    return result;
+}
+
+Matrix* subMatrices(const Matrix *mat1, const Matrix *mat2){
+    if(!mat1 || !mat2){
+        fprintf(stderr, "Error: Wrong Pointers");
+        return NULL;
+    }
+    if(mat1->rows != mat2->rows || mat1->columns != mat2->columns){
+        fprintf(stderr, "Error: not matching dimensions");
+        return NULL;
+    }
+    Matrix *result = createMatrix(mat1->rows, mat1->columns);
+    if(!result){
+        fprintf(stderr, "Error: Memory allocation failed");
+        return NULL;
+    }
+    for(int i = 0; i < mat1 ->rows; i++){
+        for(int j = 0; j < mat1->columns; j++){
+            result->data[i][j] = mat1->data[i][j] - mat2->data[i][j];
+        }
+    }
+    return result;
 }

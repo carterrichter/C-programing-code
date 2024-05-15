@@ -58,6 +58,11 @@ int main() {
     //resizeMatrix(&A, 5, 5);
     //printMatrix(A);
 
+    //Matrix *C = addMatrices(A, B);
+    //printMatrix(C);
+    //Matrix *C = subMatrices(A, B);
+    //printMatrix(C);
+
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
     freeMatrix(A);
