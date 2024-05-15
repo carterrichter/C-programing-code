@@ -15,13 +15,18 @@ int main() {
     };
     Matrix *A = createMatrix(3, 3);
     Matrix *B = createMatrix(3, 3);
+    
 
     setMatrixData(A, firstMatrix);
     setMatrixData(B, secondMatrix);
 
+    //Matrix *C = createSubset(A, 0, 2, 0, 2);
+
     printMatrix(A);
     printf("\n");
     printMatrix(B);
+    //printf("\n");
+    //printMatrix(C);
 
     //printf("\n");
     //getDimensions(A);
@@ -50,12 +55,13 @@ int main() {
     //setMatrixRow(A, 0, testForChange);
     //setMatrixColumn(A, 0, testForChange);
 
-    
+
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
     freeMatrix(A);
     freeMatrix(B);
+    //freeMatrix(C);
     printf("I will free all memory I ALLOCATE!");
 
     return 0;

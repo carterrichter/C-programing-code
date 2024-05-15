@@ -135,6 +135,7 @@ void getMatrixRow(Matrix *mat, int row) {
     }
     printf("\n");
 }
+
 void getMatrixColumn(Matrix *mat, int column){
     if(mat == NULL || column < 0 || column >= mat->columns){
         fprintf(stderr, "Error: Argument error");
@@ -164,4 +165,30 @@ void setMatrixColumn(Matrix *mat, int column, double values[]){
         mat->data[i][column] = values[i];
         printf("%.2f\n", mat->data[i][column]);
     }
+}
+
+Matrix* createSubset(Matrix *mat, int startRow, int endRow, int startColumn, int endColumn){
+    if (mat == NULL){
+        fprintf(stderr, "Error: Matrix not found");
+        return NULL;
+    }
+    if (startRow < 0 || startRow >= mat->rows || endRow < startRow || endRow >= mat->rows ||
+        startColumn < 0 || startColumn >= mat->columns || endColumn < startColumn || endColumn >= mat->columns){
+            fprintf(stderr, "Error: arguments invalid");
+            return NULL;
+    }
+
+    int newRows = endRow - startRow + 1;
+    int newColumns = endColumn - startColumn + 1;
+    Matrix *subMatrix = createMatrix(newRows, newColumns);
+    for(int i = startRow, ni = 0; i <= endRow; i++, ni++){
+        for(int j = startColumn, nj = 0; j <= endColumn; j++, nj++){
+            subMatrix->data[ni][nj] = mat->data[i][j];
+        }
+    }
+    return subMatrix;
+}
+
+void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src){
+    
 }
