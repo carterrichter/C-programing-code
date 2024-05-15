@@ -63,14 +63,28 @@ int main() {
     //Matrix *C = subMatrices(A, B);
     //printMatrix(C);
 
-    Matrix *C = multiplyMatrices(A, B);
-    printMatrix(C);
+    //Matrix *C = multiplyMatrices(A, B);
+    //Matrix *C = deepCopyMatrix(A);
+    //printMatrix(C);
+
+
+    //if (areMatricesEqual(A, B)) {
+    //    printf("The Matrices are equal!\n");
+    //} else {
+    //    printf("The Matrices are not equal.\n");
+    //}
+    //if (areMatricesEqual(A, C)) {
+    //    printf("The Matrices are equal!\n");
+    //} else {
+    //    printf("The Matrices are not equal.\n");
+    //} 
+
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
     freeMatrix(A);
     freeMatrix(B);
-    freeMatrix(C);
+    //freeMatrix(C);
     printf("I will free all memory I ALLOCATE!");
 
     return 0;

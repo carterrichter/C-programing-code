@@ -351,3 +351,26 @@ Matrix* deepCopyMatrix(const Matrix *src){
 
     return copy;
 }
+
+int areMatricesEqual(const Matrix *mat1, const Matrix *mat2){
+    if (!mat1 || !mat2) {
+        fprintf(stderr, "Error: One or more matrix pointers are NULL.\n");
+        return 0;
+    }
+
+    // Check dimensions
+    if (mat1->rows != mat2->rows || mat1->columns != mat2->columns) {
+        return 0;
+    }
+
+    // Compare elements
+    for (int i = 0; i < mat1->rows; i++) {
+        for (int j = 0; j < mat1->columns; j++) {
+            if (fabs(mat1->data[i][j] - mat2->data[i][j]) > 0.000001) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}

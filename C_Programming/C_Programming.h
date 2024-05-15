@@ -28,5 +28,7 @@ Matrix* addMatrices(const Matrix *mat1, const Matrix *mat2);
 Matrix* subMatrices(const Matrix *mat1, const Matrix *mat2);
 Matrix* multiplyMatrices(const Matrix *mat1, const Matrix *mat2);
 Matrix* deepCopyMatrix(const Matrix *src);
+int areMatricesEqual(const Matrix *mat1, const Matrix *mat2);
+void rotateMatrix(Matrix *mat);
 
 #endif
