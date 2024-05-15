@@ -208,3 +208,26 @@ void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src){
         }
     }
 }
+
+void resizeMatrix(Matrix **mat, int newRows, int newColumns){
+    if(!mat || !(*mat)){
+        fprintf(stderr, "Error: Wrong pointer provided");
+        return;
+    }
+    Matrix *newMat = createMatrix(newRows, newColumns);
+    if(!newMat){
+        fprintf(stderr, "Memory allocation failed");
+        return;
+    }
+    
+    int minRows = (newRows < (*mat)->rows) ? newRows : (*mat)->rows;
+    int minColumns = (newColumns < (*mat)->columns) ? newColumns : (*mat)->columns;
+
+    for(int i = 0; i < minRows; i++){
+        for(int j = 0; j < minColumns; j++){
+            newMat->data[i][j] = (*mat)->data[i][j];
+        }
+    }
+    freeMatrix(*mat);
+    *mat = newMat;
+}

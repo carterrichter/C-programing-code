@@ -23,5 +23,6 @@ void setMatrixRow(Matrix *mat, int row, double values[]);
 void setMatrixColumn(Matrix *mat, int column, double values[]);
 Matrix* createSubset(Matrix *mat, int startRow, int endRow, int startColumn, int endColumn);
 void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src);
+void resizeMatrix(Matrix **mat, int newRows, int newColumns);
 
 #endif

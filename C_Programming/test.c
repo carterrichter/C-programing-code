@@ -55,7 +55,8 @@ int main() {
     //setMatrixRow(A, 0, testForChange);
     //setMatrixColumn(A, 0, testForChange);
 
-
+    //resizeMatrix(&A, 5, 5);
+    //printMatrix(A);
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
