@@ -78,7 +78,8 @@ int main() {
     //} else {
     //    printf("The Matrices are not equal.\n");
     //} 
-
+    //rotateMatrix(A);
+    //printMatrix(A);
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");

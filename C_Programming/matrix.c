@@ -374,3 +374,37 @@ int areMatricesEqual(const Matrix *mat1, const Matrix *mat2){
 
     return 1;
 }
+
+void rotateMatrix(Matrix *mat){
+    if (!mat) {
+        fprintf(stderr, "Error: invalid matrix.\n");
+        return;
+    }
+    if (mat->rows != mat->columns) {
+        fprintf(stderr, "Matrix must be square to rotate in place.\n");
+        return;
+    }
+
+    int n = mat->rows;
+    for (int layer = 0; layer < n / 2; layer++) {
+        int first = layer;
+        int last = n - 1 - layer;
+        for (int i = first; i < last; i++) {
+            int offset = i - first;
+            // Save the top element
+            double top = mat->data[first][i];
+
+            // Move left element to top
+            mat->data[first][i] = mat->data[last-offset][first];
+
+            // Move bottom element to left
+            mat->data[last-offset][first] = mat->data[last][last-offset];
+
+            // Move right element to bottom
+            mat->data[last][last-offset] = mat->data[i][last];
+
+            // Assign saved top element to right
+            mat->data[i][last] = top;
+        }
+    }
+}
