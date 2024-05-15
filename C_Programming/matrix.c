@@ -247,7 +247,7 @@ Matrix* addMatrices(const Matrix *mat1, const Matrix *mat2){
         fprintf(stderr, "Error: Memory allocation failed");
         return NULL;
     }
-    for(int i = 0; i < mat1 ->rows; i++){
+    for(int i = 0; i < mat1->rows; i++){
         for(int j = 0; j < mat1->columns; j++){
             result->data[i][j] = mat1->data[i][j] + mat2->data[i][j];
         }
@@ -269,10 +269,39 @@ Matrix* subMatrices(const Matrix *mat1, const Matrix *mat2){
         fprintf(stderr, "Error: Memory allocation failed");
         return NULL;
     }
-    for(int i = 0; i < mat1 ->rows; i++){
+    for(int i = 0; i < mat1->rows; i++){
         for(int j = 0; j < mat1->columns; j++){
             result->data[i][j] = mat1->data[i][j] - mat2->data[i][j];
         }
     }
+    return result;
+}
+
+Matrix* multiplyMatrices(const Matrix *mat1, const Matrix *mat2){
+    if (!mat1 || !mat2) {
+        fprintf(stderr, "Error: One or more matrix pointers are NULL.\n");
+        return NULL;
+    }
+
+    if (mat1->columns != mat2->rows) {
+        fprintf(stderr, "Error: Incompatible dimensions for matrix multiplication.\n");
+        return NULL;
+    }
+
+    Matrix *result = createMatrix(mat1->rows, mat2->columns);
+    if (!result) {
+        fprintf(stderr, "Failed to allocate memory for the result matrix.\n");
+        return NULL;
+    }
+
+    for (int i = 0; i < result->rows; i++) {
+        for (int j = 0; j < result->columns; j++) {
+            result->data[i][j] = 0; // Initialize result matrix element
+            for (int k = 0; k < mat1->columns; k++) { // or use mat2->rows
+                result->data[i][j] += mat1->data[i][k] * mat2->data[k][j];
+            }
+        }
+    }
+
     return result;
 }

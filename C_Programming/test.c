@@ -25,7 +25,7 @@ int main() {
     printMatrix(A);
     printf("\n");
     printMatrix(B);
-    //printf("\n");
+    printf("\n");
     //printMatrix(C);
 
     //printf("\n");
@@ -63,11 +63,14 @@ int main() {
     //Matrix *C = subMatrices(A, B);
     //printMatrix(C);
 
+    Matrix *C = multiplyMatrices(A, B);
+    printMatrix(C);
+
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
     freeMatrix(A);
     freeMatrix(B);
-    //freeMatrix(C);
+    freeMatrix(C);
     printf("I will free all memory I ALLOCATE!");
 
     return 0;
