@@ -190,5 +190,21 @@ Matrix* createSubset(Matrix *mat, int startRow, int endRow, int startColumn, int
 }
 
 void setSubset(Matrix *dest, int startRow, int startColumn, Matrix *src){
-    
+    if (!dest || !src){
+        fprintf(stderr, "Error: Wrong pointer");
+        return;
+    }
+    if(startRow < 0 || startRow>= dest->rows || startColumn < 0 || startColumn >= dest->columns){
+        fprintf(stderr, "Error: Start position out of bounds");
+        return;
+    }
+    if(startRow + src->rows > dest->rows || startColumn + src->columns > dest->columns){
+        fprintf(stderr, "Error: Source Matrix does not fit in destination matrix");
+        return;
+    }
+    for(int i = 0; i < src->rows; i++){
+        for(int j = 0; j < src->columns; j++){
+            dest->data[startRow + i][startColumn + 1] = src->data[i][j];
+        }
+    }
 }
