@@ -305,3 +305,49 @@ Matrix* multiplyMatrices(const Matrix *mat1, const Matrix *mat2){
 
     return result;
 }
+
+Matrix* deepCopyMatrix(const Matrix *src){
+    if (!src) {
+        fprintf(stderr, "Error: Source matrix is NULL.\n");
+        return NULL;
+    }
+
+    // Allocate memory for the new matrix structure
+    Matrix *copy = malloc(sizeof(Matrix));
+    if (!copy) {
+        fprintf(stderr, "Memory allocation failed for the new matrix structure.\n");
+        return NULL;
+    }
+
+    // Set dimensions
+    copy->rows = src->rows;
+    copy->columns = src->columns;
+
+    // Allocate memory for row pointers
+    copy->data = malloc(copy->rows * sizeof(double*));
+    if (!copy->data) {
+        fprintf(stderr, "Memory allocation failed for row pointers.\n");
+        free(copy);
+        return NULL;
+    }
+
+    // Allocate memory for each row and copy the data
+    for (int i = 0; i < copy->rows; i++) {
+        copy->data[i] = malloc(copy->columns * sizeof(double));
+        if (!copy->data[i]) {
+            fprintf(stderr, "Memory allocation failed for row %d.\n", i);
+            // Free previously allocated memory
+            for (int j = 0; j < i; j++) {
+                free(copy->data[j]);
+            }
+            free(copy->data);
+            free(copy);
+            return NULL;
+        }
+        for (int j = 0; j < copy->columns; j++) {
+            copy->data[i][j] = src->data[i][j];
+        }
+    }
+
+    return copy;
+}

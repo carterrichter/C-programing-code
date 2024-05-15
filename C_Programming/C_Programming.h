@@ -27,5 +27,6 @@ void resizeMatrix(Matrix **mat, int newRows, int newColumns);
 Matrix* addMatrices(const Matrix *mat1, const Matrix *mat2);
 Matrix* subMatrices(const Matrix *mat1, const Matrix *mat2);
 Matrix* multiplyMatrices(const Matrix *mat1, const Matrix *mat2);
+Matrix* deepCopyMatrix(const Matrix *src);
 
 #endif
