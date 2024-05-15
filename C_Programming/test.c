@@ -34,8 +34,18 @@ int main() {
     getMatrixElement(B, 0, 1);
     printf("\n");
 
-    setElement(A, 0, 0, 0);
+    setMatrixElement(A, 0, 0, 0);
     printMatrix(A);
+    printf("\n");
+
+    printMatrixRow(A, 0);
+    printf("\n");
+    printMatrixColumn(A, 0);
+    printf("\n");
+    printMatrixRow(B, 0);
+    printf("\n");
+    printMatrixColumn(B, 0);
+
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");

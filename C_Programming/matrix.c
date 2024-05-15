@@ -113,7 +113,7 @@ double getMatrixElement(Matrix *mat, int row, int column){
     }
 }
 
-void setElement(Matrix *mat, int row, int column, double value){
+void setMatrixElement(Matrix *mat, int row, int column, double value){
     if(mat == NULL){
         fprintf(stderr, "Error: Matrix not found\n");
     }
@@ -126,3 +126,21 @@ void setElement(Matrix *mat, int row, int column, double value){
     }
 }
 
+void printMatrixRow(Matrix *mat, int row) {
+    if(mat == NULL || row < 0 || row >= mat->rows){
+        fprintf(stderr, "Error: Argument error");
+    }
+    for(int j = 0; j < mat->columns; j++){
+        printf("%.2f\t", mat->data[row][j]);
+    }
+    printf("\n");
+}
+void printMatrixColumn(Matrix *mat, int column){
+    if(mat == NULL || column < 0 || column >= mat->columns){
+        fprintf(stderr, "Error: Argument error");
+    }
+    for(int i = 0; i < mat->rows; i++){
+        printf("%.2f\n", mat->data[i][column]);
+    }
+    printf("\n");
+}
