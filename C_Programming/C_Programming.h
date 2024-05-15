@@ -1,3 +1,4 @@
+//file guards which protect the body of C_Programming.h from being included more than one time
 #ifndef C_PROGRAMMING_H
 #define C_PROGRAMMING_H
 
@@ -31,4 +32,4 @@ Matrix* deepCopyMatrix(const Matrix *src);
 int areMatricesEqual(const Matrix *mat1, const Matrix *mat2);
 void rotateMatrix(Matrix *mat);
 
-#endif
+#endif //C_PROGRAMMING_H

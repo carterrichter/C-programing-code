@@ -1,45 +1,39 @@
-# setting compiler to be used for C as gcc
+# Variables
 CC = gcc
-# additional options for safeguards for the compiler
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall -g
+TARGET = matrix_app
+TEST_TARGET = matrix_test
 
-# list of source files
-SRC = main.c matrix.c test.c
-TEST_SRC = test.c
+# Default target
+all: $(TARGET) $(TEST_TARGET)
 
-# list of object files needed to create executable
-OBJ = main.o matrix.o
-# list of object files needed to create test executable
-TEST_OBJ = test.o matrix.o
+# Link the main target binary
+$(TARGET): main.o matrix.o
+	$(CC) $(CFLAGS) -o $@ $^
 
-# naming the executable
-EXEC = matrix_app
-# naming the test executable
-TEST_EXEC = test_app
+# Compile main.c to main.o
+main.o: main.c C_Programming.h
+	$(CC) $(CFLAGS) -c $<
 
-# building both executables
-all: $(EXEC) $(TEST_EXEC)
+# Compile matrix.c to matrix.o
+matrix.o: matrix.c C_Programming.h
+	$(CC) $(CFLAGS) -c $<
 
-# Main application executable
-$(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(EXEC)
+#links the test binary
+$(TEST_TARGET): test.o matrix.o
+	$(CC) $(CFLAGS) -o $@ $^
 
-# Test application executable
-$(TEST_EXEC): $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(TEST_OBJ) -o $(TEST_EXEC) 
+#compiles test.c to test.o
+test.o: test.c C_Programming.h
+	$(CC) $(CFLAGS) -c $<
 
-# Pattern to compile any .c to .o
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Clean up
+#function that removes all .o and executable files
 clean:
-	rm -f $(OBJ) $(TEST_OBJ) $(EXEC) $(TEST_EXEC)
+	rm -f *.o $(TARGET) $(TEST_TARGET)
 
-# Run the main program
-run:
-	./$(EXEC)
-
-# Run the test program (optional target, add if needed)
-test:
-	./$(TEST_EXEC)
+# Phony target for debugging make process
+debug:
+	@echo "Compiler: $(CC)"
+	@echo "Compiler flags: $(CFLAGS)"
+	@echo "Target: $(TARGET)"
+	@echo "Test Target: $(TEST_TARGET)"
