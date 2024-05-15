@@ -7,6 +7,9 @@
 //library header for memory allocation
 #include <stdlib.h>
 
+//math library used for later
+#include <math.h>
+
 /*function used to take in two arguments (rows and columns), and returnsa pointer to a matrix structure
   as well as that this function will allocate memory to be used for a matrix and data of the matrix*/
 Matrix* createMatrix(int rows, int columns) {
@@ -109,7 +112,7 @@ double getMatrixElement(Matrix *mat, int row, int column){
     }
     //error checking to see if given row and column are within the matrix
     if (row >= 0 && row < mat->rows && column >= 0 && column < mat->columns){
-        printf("Element at specified location of specified matrix: %.2f\n", mat->data[row][column]);
+        printf("Element at row %d column %d of matrix: %.2f\n", row, column, mat->data[row][column]);
         return mat->data[row][column];
     //if not in bounds, error is printed    
     } else{
@@ -124,6 +127,7 @@ void setMatrixElement(Matrix *mat, int row, int column, double value){
         fprintf(stderr, "Error: Matrix not found\n");
     }
     if (row >= 0 && row < mat->rows && column >= 0 && column < mat->columns){
+        printf("Value at position (%d, %d) is now %f\n", row, column, value);
         mat->data[row][column] = value;
     }else{
         fprintf(stderr, "Error: Position not found\n");
@@ -383,7 +387,7 @@ int areMatricesEqual(const Matrix *mat1, const Matrix *mat2){
     // Compare elements
     for (int i = 0; i < mat1->rows; i++) {
         for (int j = 0; j < mat1->columns; j++) {
-            if (fabs(mat1->data[i][j] - mat2->data[i][j]) > 0.000001) {
+            if (fabsl(mat1->data[i][j] - mat2->data[i][j]) > 0.000001) {
                 return 0;
             }
         }

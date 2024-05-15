@@ -19,15 +19,15 @@ main.o: main.c C_Programming.h
 matrix.o: matrix.c C_Programming.h
 	$(CC) $(CFLAGS) -c $<
 
-#links the test binary
+# Link the test binary
 $(TEST_TARGET): test.o matrix.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-#compiles test.c to test.o
+# Compile test.c to test.o
 test.o: test.c C_Programming.h
 	$(CC) $(CFLAGS) -c $<
 
-#function that removes all .o and executable files
+# Phony target for cleaning up
 clean:
 	rm -f *.o $(TARGET) $(TEST_TARGET)
 
