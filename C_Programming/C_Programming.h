@@ -16,5 +16,6 @@ void freeMatrix(Matrix *mat);
 void setMatrixData(Matrix *mat, double data[][mat->columns]);
 int getDimensions(Matrix *mat);
 double getMatrixElement(Matrix *mat, int row, int column);
+void setElement(Matrix *mat, int row, int column, double value);
 
-#endif /* C_PROGRAMMING_H plea*/
+#endif

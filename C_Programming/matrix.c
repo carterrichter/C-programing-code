@@ -112,3 +112,17 @@ double getMatrixElement(Matrix *mat, int row, int column){
         return -1;
     }
 }
+
+void setElement(Matrix *mat, int row, int column, double value){
+    if(mat == NULL){
+        fprintf(stderr, "Error: Matrix not found\n");
+    }
+    if (row >= 0 && row < mat->rows && column >= 0 && column < mat->columns){
+        printf("*Changing specified element*\n");
+        printf("****************************\n");
+        mat->data[row][column] = value;
+    }else{
+        fprintf(stderr, "Error: Position not found\n");
+    }
+}
+

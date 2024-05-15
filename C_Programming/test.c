@@ -18,6 +18,7 @@ int main() {
 
     setMatrixData(A, firstMatrix);
     setMatrixData(B, secondMatrix);
+
     printMatrix(A);
     printf("\n");
     printMatrix(B);
@@ -31,6 +32,10 @@ int main() {
     getMatrixElement(A, 0, 1);
     getMatrixElement(B, 0, 0);
     getMatrixElement(B, 0, 1);
+    printf("\n");
+
+    setElement(A, 0, 0, 0);
+    printMatrix(A);
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
