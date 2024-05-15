@@ -126,7 +126,7 @@ void setMatrixElement(Matrix *mat, int row, int column, double value){
     }
 }
 
-void printMatrixRow(Matrix *mat, int row) {
+void getMatrixRow(Matrix *mat, int row) {
     if(mat == NULL || row < 0 || row >= mat->rows){
         fprintf(stderr, "Error: Argument error");
     }
@@ -135,7 +135,7 @@ void printMatrixRow(Matrix *mat, int row) {
     }
     printf("\n");
 }
-void printMatrixColumn(Matrix *mat, int column){
+void getMatrixColumn(Matrix *mat, int column){
     if(mat == NULL || column < 0 || column >= mat->columns){
         fprintf(stderr, "Error: Argument error");
     }
@@ -143,4 +143,25 @@ void printMatrixColumn(Matrix *mat, int column){
         printf("%.2f\n", mat->data[i][column]);
     }
     printf("\n");
+}
+
+void setMatrixRow(Matrix *mat, int row, double values[]){
+    if(mat == NULL || row < 0 || row >= mat->rows){
+        fprintf(stderr,"Error: Argument error\n");
+    }
+    printf("New row down below\n");
+    for(int j = 0; j < mat->columns; j++){
+        mat->data[row][j] = values[j];
+        printf("%.2f\t", mat->data[row][j]);
+    }
+}
+void setMatrixColumn(Matrix *mat, int column, double values[]){
+    if(mat == NULL || column < 0 || column >= mat->columns){
+        fprintf(stderr, "Error: Argument error");
+    }
+    printf("New row down below\n");
+    for(int i = 0; i < mat->rows; i++){
+        mat->data[i][column] = values[i];
+        printf("%.2f\n", mat->data[i][column]);
+    }
 }

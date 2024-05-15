@@ -23,29 +23,34 @@ int main() {
     printf("\n");
     printMatrix(B);
 
-    printf("\n");
-    getDimensions(A);
-    getDimensions(B);
+    //printf("\n");
+    //getDimensions(A);
+    //getDimensions(B);
 
-    printf("\n");
-    getMatrixElement(A, 0, 0);
-    getMatrixElement(A, 0, 1);
-    getMatrixElement(B, 0, 0);
-    getMatrixElement(B, 0, 1);
-    printf("\n");
+    //printf("\n");
+    //getMatrixElement(A, 0, 0);
+    //getMatrixElement(A, 0, 1);
+    //getMatrixElement(B, 0, 0);
+    //getMatrixElement(B, 0, 1);
+    //printf("\n");
 
-    setMatrixElement(A, 0, 0, 0);
-    printMatrix(A);
-    printf("\n");
+    //setMatrixElement(A, 0, 0, 0);
+    //printMatrix(A);
+    //printf("\n");
 
-    printMatrixRow(A, 0);
-    printf("\n");
-    printMatrixColumn(A, 0);
-    printf("\n");
-    printMatrixRow(B, 0);
-    printf("\n");
-    printMatrixColumn(B, 0);
+    //getMatrixRow(A, 0);
+    //printf("\n");
+    //getMatrixColumn(A, 0);
+    //printf("\n");
+    //getMatrixRow(B, 0);
+    //printf("\n");
+    //getMatrixColumn(B, 0);
 
+    double testForChange[3] = {0, 0, 0};
+    //setMatrixRow(A, 0, testForChange);
+    //setMatrixColumn(A, 0, testForChange);
+
+    
 
     // Test freeMatrix
     printf("\nFreeing memory for the matrix:\n");
